@@ -1,20 +1,21 @@
-from users.models import user
+from users.models import User
 from rest_framework import serializers
 
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
-        model = user
-        fields = ['id', 'username', 'name', 'creationtime', 'userdescription']
+        model = User
+        fields = ['id', 'username', 'name', 'creation_time', 'user_description']
 
-# for get request since we're not showing everything
+# Serializer tailored for GET requests to limit the fields shown
 class UserGETSerializer(serializers.ModelSerializer):
     class Meta:
-        model = user
-        fields = ['name', 'creationtime', 'userdescription']
+        model = User
+        fields = ['name', 'creation_time', 'user_description']
 
-# specific serializer for patch request as we don't want to update username
+# Serializer designed for PATCH requests to prevent updating the username field
 class UserPatchSerializer(serializers.ModelSerializer):
     class Meta:
-        model = user
-        fields = ['id', 'username', 'name', 'creationtime', 'userdescription']
+        model = User
+        fields = ['id', 'username', 'name', 'creation_time', 'user_description']
         read_only_fields = ['username']
+
